@@ -18,6 +18,8 @@ async def model_training(census: CensusLink):
         data = pd.read_csv(path, header = None)
     except URLError as e:
         raise HTTPException(status_code=400, detail="Bad URL link. Please specify the right link")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=400, detail="Bad URL link. Please specify the right link")
 
     # transform data
     X, y = transform_data(data)
