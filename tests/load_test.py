@@ -6,12 +6,12 @@ locust -f ./tests/load_test.py
 """
 
 
-class IrisPredict(TaskSet):
+class CensusPredict(TaskSet):
     @tag('Predictions')
     @task
     def predict(self):
-        request_body = {"data": [[4.8, 3, 1.4, 0.3]]}
-        self.client.post('/v1/iris/predict', json=request_body)
+        request_body = "https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.test.gz"
+        self.client.post('/v1/census/predict', json=request_body)
 
     @tag('Baseline')
     @task
@@ -19,8 +19,8 @@ class IrisPredict(TaskSet):
         self.client.get('/')
 
 
-class IrisLoadTest(HttpUser):
-    tasks = [IrisPredict]
+class CensusLoadTest(HttpUser):
+    tasks = [CensusPredict]
     host = 'http://127.0.0.1'
     stop_timeout = 200
     wait_time = between(1, 5)

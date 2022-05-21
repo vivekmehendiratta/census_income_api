@@ -3,8 +3,8 @@ from app import app
 
 
 def test_success_prediction():
-    endpoint = '/v1/iris/predict'
-    body = {"data": [[4.8, 3, 1.4, 0.3], [2, 1, 3.2, 1.1]]}
+    endpoint = '/v1/census/predict'
+    body = "https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.test.gz"
 
     with TestClient(app) as client:
         response = client.post(endpoint, json=body)
@@ -14,9 +14,9 @@ def test_success_prediction():
 
 
 def test_bad_request():
-    endpoint = '/v1/iris/predict'
-    body = {"data": [[4.8, 3, 1.4], [2, 1, 3.2, 1.1]]}
+    endpoint = '/v1/census/predict'
+    body = "asjkbas"
 
     with TestClient(app) as client:
         response = client.post(endpoint, json=body)
-        assert response.status_code == 422
+        assert response.status_code == 400
