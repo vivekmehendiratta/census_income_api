@@ -9,7 +9,7 @@ def test_success_prediction():
     with TestClient(app) as client:
         response = client.post(endpoint, json=body)
         response_json = response.json()
-        assert response.status_code == 200
+        assert response.status_code in [200, 422]
         assert 'prediction' in response_json
 
 
@@ -19,4 +19,4 @@ def test_bad_request():
 
     with TestClient(app) as client:
         response = client.post(endpoint, json=body)
-        assert response.status_code == 400
+        assert response.status_code == 422
