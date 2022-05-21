@@ -5,6 +5,17 @@ Run locus with:
 locust -f ./tests/load_test.py
 """
 
+class CensusTrain(TaskSet):
+    @tag('Predictions')
+    @task
+    def predict(self):
+        request_body = "https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.data.gz"
+        self.client.post('/v1/census/train', json=request_body)
+
+    @tag('Baseline')
+    @task
+    def health_check(self):
+        self.client.get('/')
 
 class CensusPredict(TaskSet):
     @tag('Predictions')
