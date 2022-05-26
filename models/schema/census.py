@@ -5,7 +5,7 @@ from typing import List, Any
 #     data: str
 #     link: str
 
-class CensusJson(BaseModel):
+class CensusDataPoint(BaseModel):
     age: int
     worker_class: str
     industry_code: int
@@ -29,6 +29,7 @@ class CensusJson(BaseModel):
     previous_residence_region:str
     previous_residence_state:str
     household_status:str
+    instance_weight:float
     household_summary:str
     migration_code_change_in_msa:str
     migration_code_change_in_reg:str
@@ -47,6 +48,9 @@ class CensusJson(BaseModel):
     weeks_worked_in_year:int
     year:int
 
+class CensusDataPointList(BaseModel):
+    dataArray: List[CensusDataPoint]
+
 class CensusLink(BaseModel):
     # train path = 'https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.data.gz'
     # test path = 'https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.test.gz'
@@ -62,5 +66,6 @@ class CensusPredictionResponse(BaseModel):
     Recall: float
     F1Score: float
     Accuracy: float
-    # prediction: List[int]
-    # probability: List[Any]
+
+class CensusJsonPredictionResponse(BaseModel):
+    prediction: List[int]

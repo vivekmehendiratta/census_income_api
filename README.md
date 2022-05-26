@@ -27,21 +27,29 @@
 
 4. Run project
 
-    `uvicorn app:app --host 0.0.0.0 --port 80`
+    `python app.py`
 
 5. API testing
 
     - Go to `localhost:80/docs`
 
-    - Request body for `/v1/census/train`
+    - Request body for Training - `/v1/census/train` :
 
         - `{"link":"https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.data.gz"}`
 
-    - Request body for `/v1/census/predict`
+    - Request body for Validation - `/v1/census/validate` :
 
-        - `{"link":"https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.test.gz"}`
+        - `{"link":"https://archive.ics.uci.edu/ml/machine-learning-databases/census-income-mld/census-income.data.gz"}`
 
-6. Deployment
+    - Request body for Predictions - `/v1/census/predict` :
+
+        - Single data point
+
+6. Load Testing
+
+    `locust -f ./tests/load_test.py`
+
+7. Deployment
 
     - Create and Run docker images
 
