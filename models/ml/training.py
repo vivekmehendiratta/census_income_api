@@ -1,17 +1,18 @@
 import joblib
+import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from xgboost import XGBClassifier as xgb_clf
 from sklearn.decomposition import PCA
 from sklearn.metrics import make_scorer, recall_score, f1_score, precision_score
 from sklearn.model_selection import cross_validate
 
-from models.ml.data_definition import train_cols
+from models.ml.data_definition import train_cols, test_cols, education_dict, other_cols
 
-def transform_data(data):
+def transform_data(data, request_type='model_building'):
     '''
     input:
         None
@@ -22,19 +23,43 @@ def transform_data(data):
     # df = pd.read_csv(StringIO(response))
 
     # add column names for better understanding
-    data.columns = train_cols
-    data.drop('instance_weight', axis = 1, inplace=True)
+    if request_type == 'predict':
+        data.columns = test_cols
+        data.drop('instance_weight', axis = 1, inplace=True)
 
-    # strip all object variables
-    data=data.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
+        # strip all object variables
+        data=data.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
+        data.replace('?', np.nan,inplace=True)
 
-    data['income'] = data['income'].map(lambda x: 0 if x=='- 50000.' else 1)
+        for col in other_cols:
+            data[col] = data[col].fillna('Other')
 
-    y = data['income']
-    X = data.drop('income', axis = 1)
-    # iris = datasets.load_iris(return_X_y=True)
-    # X = iris[0]
-    # y = iris[1]
+        data['education'].map(lambda x: education_dict[x.strip()])
+        data['occupation_code'] = data['occupation_code'].astype(object)
+        data['industry_code'] = data['industry_code'].astype(object)
+        
+        X = data
+        y = []
+    else:
+        data.columns = train_cols
+        data.drop('instance_weight', axis = 1, inplace=True)
+
+        # strip all object variables
+        data=data.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
+        data.replace('?', np.nan,inplace=True)
+
+        for col in other_cols:
+            data[col] = data[col].fillna('Other')
+
+        data['education'].map(lambda x: education_dict[x.strip()])
+        data['occupation_code'] = data['occupation_code'].astype(object)
+        data['industry_code'] = data['industry_code'].astype(object)
+
+        data['income'] = data['income'].map(lambda x: 0 if x=='- 50000.' else 1)
+
+        y = data['income']
+        X = data.drop('income', axis = 1)
+
     return X, y
 
 def build_model(X, y):
@@ -80,9 +105,9 @@ def build_model(X, y):
 
     return pipe
 
-def evaluate_model(model, X, y):
+def evaluate_model(model, X, y, cv=5):
 
-    scores = cross_validate(model, X, y, scoring={
+    scores = cross_validate(model, X, y, cv=cv, scoring={
             "precision" : make_scorer(precision_score, average = 'weighted'),
             "recall" : make_scorer(recall_score, average = 'weighted'),
             "f1_score" : make_scorer(f1_score, average='weighted')
