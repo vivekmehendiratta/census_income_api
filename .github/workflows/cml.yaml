@@ -3,11 +3,11 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
-    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
       - name: Train model
-      run: |
+        run: |
           # Your ML workflow goes here
           pip install -r requirements.txt
           cd /models/ml/
@@ -28,4 +28,3 @@ jobs:
           cml-publish PR-curve.png >> report.md
 
           cml send-comment report.md
-          
