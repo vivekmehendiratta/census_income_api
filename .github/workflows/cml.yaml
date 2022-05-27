@@ -24,6 +24,6 @@ jobs:
           cml-publish CM.png --md >> report.md
 
           echo  "## PR curve" > report.md
-          cml-publish PR-curve.png >> report.md
+          cml-publish PR_curve.png >> report.md
 
           cml send-comment report.md
