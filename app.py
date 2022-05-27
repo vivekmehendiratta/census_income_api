@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from joblib import load
 from routes.v1.census_predict import app_census_predict_v1
 from routes.v1.census_train import app_census_train_v1
 from routes.v1.census_validate import app_census_validate_v1
