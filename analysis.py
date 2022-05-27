@@ -31,13 +31,13 @@ recall = recall_score(y, prediction, average='weighted')
 scores_dict = {"Precision": round(precision, 2),
                "Recall": round(recall, 2),
                "F1Score": round(f1, 2)}
-               
+
 print(scores_dict)
 
 ## metrics report
 with open("metrics.txt", 'w') as f: 
     for key, value in scores_dict.items(): 
-        f.write('%s:%s\n' % (key, value))
+        f.write('%s : %s\n' % (key, value))
 
 
 # confusion matrix

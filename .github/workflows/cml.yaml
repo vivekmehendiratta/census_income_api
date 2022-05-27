@@ -3,9 +3,11 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
-    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: iterative/setup-cml@v1
       - name: Train model
         run: |
           # Your ML workflow goes here
