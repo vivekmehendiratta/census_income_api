@@ -17,7 +17,7 @@ jobs:
         run: |
           # Post reports as comments in GitHub PRs
           
-          echo "## Model performance metrics" > report.md
+          # echo "## Model performance metrics" > report.md
           cat metrics.txt >> report.md
 
           echo "## Confusion Matrix" >> report.md
@@ -26,4 +26,4 @@ jobs:
           echo  "## PR curve" >> report.md
           cml-publish PR_curve.png --md >> report.md
 
-          cml send-comment report.md
+          cml-send-comment report.md
