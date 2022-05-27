@@ -19,8 +19,7 @@ scores = evaluate_model(pipe, X, y, cv=5)
 
 scores_dict = {"Precision": round(np.mean(scores['test_precision']), 2),
                "Recall": round(np.mean(scores['test_recall']), 2),
-               "F1Score": round(np.mean(scores['test_f1_score']), 2),
-               "Accuracy": round(np.mean(scores['test_accuracy']), 2)}
+               "F1Score": round(np.mean(scores['test_f1_score']), 2)}
 
 print(scores_dict)
 
