@@ -1,0 +1,31 @@
+name: model-census-income
+on: [push]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: iterative/setup-cml@v1
+      - name: Train model
+        run: |
+          # Your ML workflow goes here
+          pip install -r requirements.txt
+          python analysis.py
+      - name: Write CML report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Post reports as comments in GitHub PRs
+
+          echo "## Model performance metrics" > report.md
+          cat metrics.txt >> report.md
+
+          echo "## Confusion Matrix" >> report.md
+          cml publish CM.png --md >> report.md
+
+          echo  "## PR curve" >> report.md
+          cml publish PR_curve.png --md >> report.md
+
+          cml send-comment report.md
