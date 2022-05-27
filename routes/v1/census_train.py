@@ -3,9 +3,9 @@ from fastapi import APIRouter, HTTPException
 from models.schema.census import CensusLink, CensusTrainingResponse
 import pandas as pd
 import numpy as np
-from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+from sklearn.metrics import precision_score, recall_score, f1_score
 
-from models.ml.training import build_model, transform_data, evaluate_model, save_model
+from models.ml.training import build_model, transform_data, save_model
 
 app_census_train_v1 = APIRouter()
 
