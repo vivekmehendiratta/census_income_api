@@ -14,7 +14,7 @@ app_census_validate_v1 = APIRouter()
                              tags=["Cross Validation"],
                              response_model=CensusTrainingResponse,
                              description="Fetch the data from the link, and cross validate it using available classifier")
-async def model_training(census: CensusLink):
+async def cross_validation(census: CensusLink):
 
     try:
         clf = load('models/ml/classifier.pkl')

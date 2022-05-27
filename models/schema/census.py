@@ -1,9 +1,6 @@
 from ast import Str
-from pydantic import BaseModel, conlist
-from typing import List, Any
-# class CensusRaw(BaseModel):
-#     data: str
-#     link: str
+from pydantic import BaseModel
+from typing import List
 
 class CensusDataPoint(BaseModel):
     age: int
