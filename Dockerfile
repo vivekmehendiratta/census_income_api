@@ -35,6 +35,8 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt \
 
 COPY . .
 
-CMD ["uvicorn", "app:app"]
+CMD uvicorn --bind 0.0.0.0:$PORT app:app
+
+# CMD ["uvicorn", "app:app", "--bind", "0.0.0.0:$PORT"]
 
 # CMD ["python", "app.py"]
