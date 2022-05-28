@@ -25,10 +25,10 @@ jobs:
           echo "## Model performance metrics" > report.md
           cat metrics.txt >> report.md
 
-          # echo "## Confusion Matrix" >> report.md
-          # cml publish CM.png --md >> report.md
+          echo "## Confusion Matrix" >> report.md
+          cml publish CM.png --md >> report.md
 
-          # echo  "## PR curve" >> report.md
-          # cml publish PR_curve.png --md >> report.md
+          echo  "## PR curve" >> report.md
+          cml publish PR_curve.png --md >> report.md
 
-          # cml send-comment report.md
+          cml send-comment report.md

@@ -13,11 +13,11 @@ data = pd.read_csv(path, header=None)
 X, y = transform_data(data)
 
 # model building
-# pipe = build_model(X, y)
+pipe = build_model(X, y)
 
-# prediction = pipe.predict(X).tolist()
+prediction = pipe.predict(X).tolist()
 
-prediction = [0]*len(X)
+# prediction = [0]*len(X)
 
 f1 = f1_score(y, prediction, average='weighted')
 precision = precision_score(y, prediction, average='weighted')
@@ -36,14 +36,14 @@ with open("metrics.txt", 'w') as f:
 
 
 # confusion matrix
-# ConfusionMatrixDisplay.from_estimator(
-#     pipe, X, y, cmap="YlGn", normalize="true"
-# )
-# plt.savefig('CM.png')
+ConfusionMatrixDisplay.from_estimator(
+    pipe, X, y, cmap="YlGn", normalize="true"
+)
+plt.savefig('CM.png')
 
-# # PR curve
-# display = PrecisionRecallDisplay.from_estimator(
-#     pipe, X, y, name="XGBoost"
-# )
-# _ = display.ax_.set_title("2-class Precision-Recall curve")
-# plt.savefig("PR_curve.png")
+# PR curve
+display = PrecisionRecallDisplay.from_estimator(
+    pipe, X, y, name="XGBoost"
+)
+_ = display.ax_.set_title("2-class Precision-Recall curve")
+plt.savefig("PR_curve.png")
