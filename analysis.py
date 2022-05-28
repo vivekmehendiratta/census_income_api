@@ -35,7 +35,7 @@ with open("metrics.txt", 'w') as f:
         f.write('%s : %s\n' % (key, value))
 
 
-confusion matrix
+# confusion matrix
 ConfusionMatrixDisplay.from_estimator(
     pipe, X, y, cmap="YlGn", normalize="true"
 )
