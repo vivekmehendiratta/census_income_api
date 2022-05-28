@@ -17,7 +17,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: akhileshns/heroku-deploy@v3.12.12
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -37,6 +36,8 @@ jobs:
       run: |
         pytest
     - name: Deploying to Heroku
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "census-income-prediction-ml" #Must be unique in Heroku
