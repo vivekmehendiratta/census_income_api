@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Build and Deploy
+name: Build-Deploy-Release
 
 on:
   push:
@@ -37,6 +37,9 @@ jobs:
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "census-income-prediction-ml" #Must be unique in Heroku
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
         heroku_email: "mehendiratta.vivek@utexas.edu"
         usedocker: true
+    - name: Release
+      run: |
+        heroku container:release web --app=${{secrets.HEROKU_APP_NAME}}
