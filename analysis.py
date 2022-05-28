@@ -36,14 +36,14 @@ with open("metrics.txt", 'w') as f:
 
 
 # confusion matrix
-ConfusionMatrixDisplay.from_estimator(
-    pipe, X, y, cmap="YlGn", normalize="true"
-)
-plt.savefig('CM.png')
+# ConfusionMatrixDisplay.from_estimator(
+#     pipe, X, y, cmap="YlGn", normalize="true"
+# )
+# plt.savefig('CM.png')
 
-# PR curve
-display = PrecisionRecallDisplay.from_estimator(
-    pipe, X, y, name="XGBoost"
-)
-_ = display.ax_.set_title("2-class Precision-Recall curve")
-plt.savefig("PR_curve.png")
+# # PR curve
+# display = PrecisionRecallDisplay.from_estimator(
+#     pipe, X, y, name="XGBoost"
+# )
+# _ = display.ax_.set_title("2-class Precision-Recall curve")
+# plt.savefig("PR_curve.png")
