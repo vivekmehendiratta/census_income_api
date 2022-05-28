@@ -13,6 +13,6 @@ app.include_router(app_census_predict_v1, prefix='/v1')
 app.include_router(app_census_train_v1, prefix='/v1')
 app.include_router(app_census_validate_v1, prefix = '/v1')
 
-# if __name__ == "__main__":
-#     port = int(os.environ.get('PORT', 5000))
-#     uvicorn.run("app:app", host='0.0.0.0', port=port)
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    uvicorn.run("app:app", host='0.0.0.0', port=port)
