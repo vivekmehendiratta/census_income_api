@@ -50,5 +50,7 @@ scores_dict = {"Precision": round(precision, 4),
 ## metrics report
 with open("metrics.json", 'w') as out: 
     json.dump(scores_dict, out)
-    # for key, value in scores_dict.items(): 
-    #     f.write('%s : %s\n' % (key, value))
+
+with open("metrics.txt", 'w') as out: 
+    for key, value in scores_dict.items(): 
+        out.write('%s : %s\n' % (key, value))
