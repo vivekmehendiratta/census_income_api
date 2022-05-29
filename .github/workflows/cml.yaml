@@ -26,8 +26,8 @@ jobs:
           echo "## Model performance metrics" > report.md
           cat metrics.txt >> report.md
 
-          echo "## Metrics Comparison" >> report.md
-          dvc metrics diff main --show-md >> report.md
+          # echo "## Metrics Comparison" >> report.md
+          # dvc metrics diff main --show-md >> report.md
 
           echo "## Confusion Matrix" >> report.md
           cml publish CM.png --md >> report.md
