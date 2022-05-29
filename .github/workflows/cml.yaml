@@ -27,7 +27,7 @@ jobs:
           cat metrics.txt >> report.md
 
           echo "## Metrics Comparison" >> report.md
-          dvc metrics diff master --show-md >> report.md
+          dvc metrics diff main --show-md >> report.md
 
           echo "## Confusion Matrix" >> report.md
           cml publish CM.png --md >> report.md
