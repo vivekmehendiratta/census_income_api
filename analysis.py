@@ -48,7 +48,7 @@ scores_dict = {"Precision": round(precision, 4),
 # print(scores_dict)
 
 ## metrics report
-with open("metrics_json.json", 'w') as out: 
+with open("metrics.json", 'w') as out: 
     json.dump(scores_dict, out)
 
 with open("metrics.txt", 'w') as out: 
