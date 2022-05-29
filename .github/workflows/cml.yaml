@@ -23,7 +23,7 @@ jobs:
           # Post reports as comments in GitHub PRs
 
           echo "## Model performance metrics" > report.md
-          cat metrics.txt >> report.md
+          cat metrics.json >> report.md
 
           echo "## Confusion Matrix" >> report.md
           cml publish CM.png --md >> report.md
