@@ -11,7 +11,7 @@ app = FastAPI(title="Census Income ML API", description="API for census income d
 app.include_router(app_home)
 app.include_router(app_census_predict_v1, prefix='/v1')
 app.include_router(app_census_train_v1, prefix='/v1')
-app.include_router(app_census_validate_v1, prefix = '/v1')
+# app.include_router(app_census_validate_v1, prefix = '/v1')
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
