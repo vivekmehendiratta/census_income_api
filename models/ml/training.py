@@ -103,7 +103,7 @@ def build_model(X, y):
 
     pipe = Pipeline([
         ('preprocessor', preprocessor),
-        ('pca', PCA(n_components=20)),
+        ('pca', PCA(n_components=50)),
         ('classifier', xgb_clf())
     ])
 
